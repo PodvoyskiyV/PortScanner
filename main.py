@@ -18,7 +18,7 @@ else:
 try:
     ports_number = sys.argv[2]
     if ports_number > 65535 or ports_number < 0:
-        print('port must be 0-65535.')
+        print('port must be 0-65535')
 except:
     ports_number = 65535
 
