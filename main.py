@@ -1,6 +1,3 @@
-# to start you should use command 'python3 PortScanner/main.py {xxx.xxx.xxx.xxx} {last port}'
-# or 'python3 PortScanner/main.py {hostname} {last port}'
-
 import pyfiglet
 import sys
 import socket
@@ -13,16 +10,19 @@ try:
     if len(sys.argv) == 3:
         target = socket.gethostbyname(sys.argv[1])
         ports_number = sys.argv[2]
+
     else:
         print('Port Scanner will scan all ports from 0 to LAST')
         ports_number = input('[*] Enter Last PORT: ')
-        while(True):
+
+        while True:
             try:
                 if int(ports_number) > 65535 or int(ports_number) < 0:
                     print('E: Last PORT is incorrect.')
                     ports_number = input('[*] Enter Last PORT from 0 to 65535: ')
                 else:
                     break
+
             except ValueError:
                 print('E: Last PORT is incorrect.')
                 ports_number = input('[*] Enter Last PORT from 0 to 65535: ')
@@ -30,8 +30,7 @@ try:
         target = input('[*] Enter Target IP like xxx.xxx.xxx.xxx: ')
 
     flag = True
-
-    while(flag):
+    while flag:
         target = (target.split(sep='.'))
 
         if len(target) != 4:
@@ -53,16 +52,12 @@ try:
             else:
                 flag = False
                 target = '.'.join(target)
-except KeyboardInterrupt:
-    print("\n Program finished !!!!")
-    sys.exit()
 
-print("-" * 50)
-print("Scanning Target: " + target)
-print("Scanning started at:" + str(datetime.now()))
-print("-" * 50)
+    print("-" * 50)
+    print("Scanning Target: " + target)
+    print("Scanning started at:" + str(datetime.now()))
+    print("-" * 50)
 
-try:
     for port in range(0, int(ports_number) + 1):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         socket.setdefaulttimeout(1)
@@ -70,6 +65,8 @@ try:
         if result == 0:
             print("Port {} is open".format(port))
         s.close()
+
+
 except KeyboardInterrupt:
     print("\n Program finished !!!!")
     sys.exit()
