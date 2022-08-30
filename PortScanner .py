@@ -2,9 +2,10 @@ import pyfiglet
 import sys
 import socket
 from datetime import datetime
+from termcolor import colored
 
 banner = pyfiglet.figlet_format("PORT SCANNER")
-print(banner)
+print(colored(banner, 'green'))
 
 try:
     if len(sys.argv) == 3:
