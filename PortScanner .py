@@ -8,14 +8,17 @@ banner = pyfiglet.figlet_format("PORT SCANNER")
 print(colored(banner, 'green'))
 
 try:
+    # receive arguments from command line
     if len(sys.argv) == 3:
         target = socket.gethostbyname(sys.argv[1])
         ports_number = sys.argv[2]
 
+    # get target IP and last port number from user
     else:
         print('Port Scanner will scan all ports from 0 to LAST')
         ports_number = input('[*] Enter Last PORT: ')
 
+        # check for valid data last port number
         while True:
             try:
                 if int(ports_number) > 65535 or int(ports_number) < 0:
@@ -30,6 +33,7 @@ try:
 
         target = input('[*] Enter Target IP like xxx.xxx.xxx.xxx: ')
 
+    # check for valid data target IP
     flag = True
     while flag:
         target = (target.split(sep='.'))
@@ -59,6 +63,7 @@ try:
     print("Scanning started at:" + str(datetime.now()))
     print("-" * 50)
 
+    # check port status
     for port in range(0, int(ports_number) + 1):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         socket.setdefaulttimeout(1)
